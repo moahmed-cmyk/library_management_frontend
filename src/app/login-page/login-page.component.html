@@ -1,0 +1,60 @@
+<main>
+
+
+    <form [formGroup]="userForm" class="div-4">
+
+        <div class="div-3">
+            <p class="p-email">Email</p>
+            <div class="div-5">
+                <img src="assets/email-logo.svg" alt="" class="img-gmail">
+
+                <input type="text" placeholder="Enter your email address" formControlName="age" class="input-1"
+                    (input)="checkInput()">
+
+                <p class="text" *ngIf="(isSubmitted && userForm.get('age')?.invalid) || userForm.get('age')?.touched">
+                    <span *ngIf="userForm.get('age')?.hasError('required')">The field is required</span>
+                </p>
+
+                <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
+            </div>
+
+        </div>
+
+        <div class="div-3">
+            <p class="p-email">Password</p>
+            <div class="div-5">
+                <img src="assets/lock-logo.svg" alt="" class="img-lock">
+
+                <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter your password"
+                    formControlName="password" class="input-1">
+
+                <p class="text"
+                    *ngIf="(isSubmitted && userForm.get('password')?.invalid) || userForm.get('password')?.touched">
+                    <span *ngIf="userForm.get('password')?.hasError('required')">Required minimum age is 18</span>
+                </p>
+
+                <img class="img-hide" [src]="isPasswordVisible ? 'assets/eye-solid.svg' : 'assets/hide-logo.svg'"
+                    (click)="togglePasswordVisibility()" alt="Toggle visibility">
+            </div>
+
+        </div>
+
+        <div class="div-6">
+
+            <p class="p-password">Forgot Password ?</p>
+
+        </div>
+        <button class="btn-login" (click)="addDetail()">Log in</button>
+
+        <p class="p-dont" routerLink="/registerForm">Don’t have an account? <span class="span-1">Sign Up</span></p>
+
+    </form>
+
+    <div class="div-9">
+
+    <img src="assets/4957136.jpg" alt="" class="img-login">
+
+    
+    </div>
+
+</main>
