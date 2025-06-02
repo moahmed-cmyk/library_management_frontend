@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { UsersService } from '../users.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-page',
@@ -11,11 +13,27 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginPageComponent {
 
+  users:any[]=[]
   userForm!: FormGroup
   isSubmitted:boolean=false
   age: string = ""
   showClearButton = false;
   isPasswordVisible = false; 
+
+  usersService:UsersService=inject(UsersService)
+
+  loginUser(data:any):void{
+    this.usersService.loginUser(data).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.users=res
+      },
+      error:(err:HttpErrorResponse)=>{
+        console.log(err);
+        
+      }
+    })
+  }
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
@@ -49,8 +67,8 @@ export class LoginPageComponent {
     })
   }
 
-addDetail() {
- this.isSubmitted=true
-}
+// addDetail() {
+//  this.isSubmitted=true
+// }
 
 }

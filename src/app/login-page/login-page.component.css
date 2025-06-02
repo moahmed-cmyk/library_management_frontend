@@ -67,7 +67,14 @@ main {
     gap: 2rem;
     margin-bottom: 7rem;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+}
+
+.p-login {
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 31px;
 }
 
 .p-email {
@@ -154,7 +161,7 @@ main {
 }
 
 .img-login {
-    max-width: 30rem;
+    max-width: 38rem;
 }
 
 .p-dont {
@@ -234,6 +241,19 @@ main {
 
 .text {
     color: red;
+    margin-top: 5px;
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+.div-15 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid lightgray 2px;
+    border-radius: 10px;
+    padding-inline: 24px;
+    padding-block: 17px;
 }
 
 
@@ -259,107 +279,68 @@ main {
     }
 }
 
-@media(max-width:883px) {
+@media(max-width:1105px) {
     main {
         flex-direction: column-reverse;
-        align-items: center;
     }
 
-    .div-4 {
-        border: solid gray 1px;
-        border-radius: 11px;
-        padding-inline: 50px;
-        padding-block: 30px;
+    .img-login {
+        max-width: 33rem;
+    }
+
+    .p-login {
+        margin-bottom: 0;
     }
 }
 
 
 @media(max-width:640px) {
-
-    .img-back {
-        max-width: 19rem;
-    }
-
-    .banner {
-        max-width: 19rem;
-    }
-
-    .div-10 {
-        top: 12rem;
-        left: 36px;
-        text-align: center;
-    }
-
-    .p-access {
-        font-size: 12px;
-    }
-
-    .p-welcome {
-        font-size: 22px;
-    }
-
-    .div-4 {
-        padding-inline: 15px;
-        padding-block: 32px;
+    .p-login {
+        font-size: 29px;
     }
 
     .p-email {
-        font-size: 13px;
+        font-size: 11px;
     }
 
     .img-gmail {
-        max-width: 40px;
-        top: 18px;
-    }
+        max-width: 12px;
+        position: absolute;
+        padding-left: 26px;
+        left: -15px;
+        top: 7px;
 
-    .x-btn {
-        max-width: 40px;
-        max-width: 10px;
     }
 
     .input-1 {
-        font-size: 13px;
-        width: 17rem;
+        border: solid gray 2px;
+        outline: none;
+        border-radius: 5px;
+        padding-left: 27px;
+        padding-block: 5px;
+        font-size: 11px;
+        font-weight: 500;
+        width: 11rem;
     }
 
     .img-lock {
-        max-width: 40px;
-        top: 16px;
+        position: absolute;
+        padding-left: 26px;
+        max-width: 12px;
+        left: -15px;
+        top: 5px;
     }
 
     .img-hide {
-        max-width: 13px;
-        top: 18px;
-    }
-
-    .p-remember {
-        font-size: 12px;
-    }
-
-    .div-7 {
-        align-items: center;
+        position: absolute;
+        right: 12px;
+        max-width: 12px;
+        top: 7px;
     }
 
     .p-password {
-        font-size: 12px;
-    }
+        font-size: 11px;
 
-    .img-google {
-        left: 63px;
-        top: 20px;
-        max-width: 13px;
-    }
-
-    .btn-google {
-        font-size: 12px;
-    }
-
-    .btn-login {
-        font-size: 12px;
-    }
-
-    .p-dont {
-        font-size: 13px;
     }
 
 }
