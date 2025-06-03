@@ -37,7 +37,7 @@ export class LoginPageComponent {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      age: ['', Validators.required] 
+      email: ['', Validators.required] 
     });
     this.userForm = this.fb.group({
       password: ['', Validators.required,Validators.minLength(6)] 
@@ -53,7 +53,7 @@ export class LoginPageComponent {
   }
 
   checkInput() {
-    this.showClearButton = this.userForm.get('age')?.value.length > 0;
+    this.showClearButton = this.userForm.get('email')?.value.length > 0;
   }
 
   clearInput() {
@@ -65,7 +65,7 @@ export class LoginPageComponent {
   
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      age: [null, Validators.required],
+      email: [null, Validators.required],
       password: [null, [Validators.required]],
        role: [null, [Validators.required]],
     })

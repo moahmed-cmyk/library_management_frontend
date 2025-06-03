@@ -1,0 +1,63 @@
+main {
+    background-color: rgba(245, 245, 245, 0.889);
+    margin-inline: auto;
+    max-width: 93rem;
+}
+
+.img-admin {
+    max-width: 17px;
+    width: 100%;
+}
+
+.p-admin {
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+
+.div-21 {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.div-22 {
+    margin-top: 1.5rem;
+}
+
+.img-stock {
+    width: 100%;
+    max-width: 15px;
+}
+
+.p-stock {
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.img-right {
+    width: 100%;
+    max-width: 9px;
+}
+
+.div-20 {
+    width: 16rem;
+}
+
+.div-24 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn-stock {
+    width: 100%;
+    border: none;
+}
+
+.btn-stock:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 255, 0.91);
+}

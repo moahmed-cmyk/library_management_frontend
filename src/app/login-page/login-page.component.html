@@ -13,12 +13,11 @@
                 <div class="div-5">
                     <img src="assets/email-logo.svg" alt="" class="img-gmail">
 
-                    <input type="text" placeholder="Enter your email address" formControlName="age" class="input-1"
-                        (input)="checkInput()">
+                    <input type="text" placeholder="Enter your email address" formControlName="email" class="input-1">
 
                     <p class="text"
-                        *ngIf="(isSubmitted && userForm.get('age')?.invalid) || userForm.get('age')?.touched">
-                        <span *ngIf="userForm.get('age')?.hasError('required')">The field is required</span>
+                        *ngIf="(isSubmitted && userForm.get('email')?.invalid) || userForm.get('email')?.touched">
+                        <span *ngIf="userForm.get('email')?.hasError('required')">The field is required</span>
                     </p>
 
                     <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
@@ -48,6 +47,7 @@
 
             <select name="Select a Role" id="" class="select-1" formControlName="role">
                 <option value="">Select a Role</option>
+                <option value="admin">admin</option>
                 <option value="Librarian">Librarian</option>
                 <option value="Member">Member</option>
 
