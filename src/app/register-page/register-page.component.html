@@ -1,0 +1,128 @@
+<main>
+    <div class="div-15">
+        <div>
+
+            <p class="p-login">Log In</p>
+
+        </div>
+
+        <form [formGroup]="userForm" (ngSubmit)="registerUser(userForm.value)" class="div-4">
+
+            <div class="div-3">
+                <p class="p-email">Name</p>
+                <div class="div-5">
+                    <img src="assets/email-logo.svg" alt="" class="img-gmail">
+
+                    <input type="text" placeholder="Enter your Name" formControlName="name" class="input-1"
+                        (input)="checkInput()">
+
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('name')?.invalid) || userForm.get('name')?.touched">
+                        <span *ngIf="userForm.get('name')?.hasError('required')">The field is required</span>
+                    </p>
+
+                    <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
+                </div>
+
+            </div>
+            <div class="div-3">
+                <p class="p-email">Email</p>
+                <div class="div-5">
+                    <img src="assets/email-logo.svg" alt="" class="img-gmail" alt="no image">
+
+                    <input type="email" placeholder="Enter your email address" formControlName="email" class="input-1"
+                        (input)="checkInput()">
+
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('email')?.invalid) || userForm.get('email')?.touched">
+                        <span *ngIf="userForm.get('email')?.hasError('required')">The field is required</span>
+                    </p>
+
+                    <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
+                </div>
+
+            </div>
+
+            <div class="div-3">
+                <p class="p-email">Password</p>
+                <div class="div-5">
+                    <img src="assets/lock-logo.svg" alt="" class="img-lock">
+
+                    <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter your password"
+                        formControlName="password" class="input-1">
+
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('password')?.invalid) || userForm.get('password')?.touched">
+                        <span *ngIf="userForm.get('password')?.hasError('required')">Minimum character of password is
+                            six
+                        </span>
+                    </p>
+
+                    <img class="img-hide" [src]="isPasswordVisible ? 'assets/eye-solid.svg' : 'assets/hide-logo.svg'"
+                        (click)="togglePasswordVisibility()" alt="Toggle visibility">
+                </div>
+
+            </div>
+
+            <div class="div-16">
+                <p> Select a Role</p>
+                <select name="Select a Role" id="" class="select-1" formControlName="role">
+                    <option value="">Select a Role</option>
+                    <option value="librarian">librarian</option>
+                    <option value="member">member</option>
+
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('role')?.invalid) || userForm.get('role')?.touched">
+                        <span *ngIf="userForm.get('role')?.hasError('required')">The Field is Required
+                        </span>
+                    </p>
+
+                </select>
+            </div>
+
+              <div class="div-3">
+                <p class="p-email">Created at</p>
+                <div class="div-5">
+                    <img src="assets/email-logo.svg" alt="" class="img-gmail">
+
+                    <input type="date" placeholder="Enter the date" formControlName="created_at" class="input-1"
+                        (input)="checkInput()">
+
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('created_at')?.invalid) || userForm.get('created_at')?.touched">
+                        <span *ngIf="userForm.get('created_at')?.hasError('required')">The field is required</span>
+                    </p>
+
+                    <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
+                </div>
+
+            </div>
+
+
+
+            <div class="div-6">
+
+                <p class="p-password">Forgot Password ?</p>
+
+            </div>
+            <button class="btn-login" type="submit">Log in</button>
+
+            <p class="p-dont" routerLink="/registerForm">Don’t have an account? <span class="span-1">Sign Up</span>
+            </p>
+
+        </form>
+    </div>
+
+
+
+    <div class="div-9">
+
+        <img src="assets\340366-PAPUKD-986.jpg" alt="" class="img-login">
+
+
+    </div>
+
+
+
+
+</main>

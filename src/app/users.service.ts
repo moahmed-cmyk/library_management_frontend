@@ -12,6 +12,9 @@ export class UsersService {
   loginUser(req:any): Observable<any> {
     return this.http.post('/login',req)
   }
+  registerUser(req:any): Observable<any> {
+    return this.http.post('/register',req)
+  }
 
   http: HttpClient = inject(HttpClient);
 

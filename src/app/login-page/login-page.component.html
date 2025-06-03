@@ -1,73 +1,85 @@
 <main>
-        <div class="div-15">
-            <div>
+    <div class="div-15">
+        <div>
 
-                <p class="p-login">Log In</p>
+            <p class="p-login">Log In</p>
+
+        </div>
+
+        <form [formGroup]="userForm" (ngSubmit)="loginUser(userForm.value)" class="div-4">
+
+            <div class="div-3">
+                <p class="p-email">Email</p>
+                <div class="div-5">
+                    <img src="assets/email-logo.svg" alt="" class="img-gmail">
+
+                    <input type="text" placeholder="Enter your email address" formControlName="age" class="input-1"
+                        (input)="checkInput()">
+
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('age')?.invalid) || userForm.get('age')?.touched">
+                        <span *ngIf="userForm.get('age')?.hasError('required')">The field is required</span>
+                    </p>
+
+                    <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
+                </div>
 
             </div>
 
-            <form [formGroup]="userForm" (ngSubmit)="loginUser(userForm.value)" class="div-4">
+            <div class="div-3">
+                <p class="p-email">Password</p>
+                <div class="div-5">
+                    <img src="assets/lock-logo.svg" alt="" class="img-lock">
 
-                <div class="div-3">
-                    <p class="p-email">Email</p>
-                    <div class="div-5">
-                        <img src="assets/email-logo.svg" alt="" class="img-gmail">
+                    <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter your password"
+                        formControlName="password" class="input-1">
 
-                        <input type="text" placeholder="Enter your email address" formControlName="age" class="input-1"
-                            (input)="checkInput()" >
+                    <p class="text"
+                        *ngIf="(isSubmitted && userForm.get('password')?.invalid) || userForm.get('password')?.touched">
+                        <span *ngIf="userForm.get('password')?.hasError('required')">Minimum character of password is 6
+                        </span>
+                    </p>
 
-                        <p class="text"
-                            *ngIf="(isSubmitted && userForm.get('age')?.invalid) || userForm.get('age')?.touched">
-                            <span *ngIf="userForm.get('age')?.hasError('required')">The field is required</span>
-                        </p>
-
-                        <img class="x-btn" src="assets/x-btn.svg" *ngIf="showClearButton" (click)="clearInput()">
-                    </div>
-
+                    <img class="img-hide" [src]="isPasswordVisible ? 'assets/eye-solid.svg' : 'assets/hide-logo.svg'"
+                        (click)="togglePasswordVisibility()" alt="Toggle visibility">
                 </div>
 
-                <div class="div-3">
-                    <p class="p-email">Password</p>
-                    <div class="div-5">
-                        <img src="assets/lock-logo.svg" alt="" class="img-lock">
+            </div>
 
-                        <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter your password"
-                            formControlName="password" class="input-1">
+            <select name="Select a Role" id="" class="select-1" formControlName="role">
+                <option value="">Select a Role</option>
+                <option value="Librarian">Librarian</option>
+                <option value="Member">Member</option>
 
-                        <p class="text"
-                            *ngIf="(isSubmitted && userForm.get('password')?.invalid) || userForm.get('password')?.touched">
-                            <span *ngIf="userForm.get('password')?.hasError('required')">Required minimum age is
-                                18</span>
-                        </p>
-
-                        <img class="img-hide"
-                            [src]="isPasswordVisible ? 'assets/eye-solid.svg' : 'assets/hide-logo.svg'"
-                            (click)="togglePasswordVisibility()" alt="Toggle visibility">
-                    </div>
-
-                </div>
-
-                <div class="div-6">
-
-                    <p class="p-password">Forgot Password ?</p>
-
-                </div>
-                <button class="btn-login" type="submit">Log in</button>
-
-                <p class="p-dont" routerLink="/registerForm">Don’t have an account? <span class="span-1">Sign Up</span>
+                <p class="text"
+                    *ngIf="(isSubmitted && userForm.get('role')?.invalid) || userForm.get('role')?.touched">
+                    <span *ngIf="userForm.get('role')?.hasError('required')">The Field is Required
+                    </span>
                 </p>
 
-            </form>
-        </div>
+            </select>
+
+            <div class="div-6">
+
+                <p class="p-password">Forgot Password ?</p>
+
+            </div>
+            <button class="btn-login" type="submit">Log in</button>
+
+            <p class="p-dont" routerLink="/registerForm">Don’t have an account? <span class="span-1">Sign Up</span>
+            </p>
+
+        </form>
+    </div>
 
 
 
-        <div class="div-9">
+    <div class="div-9">
 
-            <img src="assets/4957136.jpg" alt="" class="img-login">
+        <img src="assets/4957136.jpg" alt="" class="img-login">
 
 
-        </div>
+    </div>
 
 
 

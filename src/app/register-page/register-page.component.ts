@@ -1,17 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { UsersService } from '../users.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { UsersService } from '../users.service';
+import { ReactiveFormsModule } from '@angular/forms'; 
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-register-page',
   imports: [FormsModule, CommonModule, ReactiveFormsModule,RouterLink],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.css'
+  templateUrl: './register-page.component.html',
+  styleUrl: './register-page.component.css'
 })
-export class LoginPageComponent {
+export class RegisterPageComponent {
 
   users:any[]=[]
   userForm!: FormGroup
@@ -21,9 +22,10 @@ export class LoginPageComponent {
   isPasswordVisible = false; 
 
   usersService:UsersService=inject(UsersService)
+registerForm: any;
 
-  loginUser(data:any):void{
-    this.usersService.loginUser(data).subscribe({
+  registerUser(data:any):void{
+    this.usersService.registerUser(data).subscribe({
       next:(res:any)=>{
         console.log(res);
         this.users=res
@@ -37,13 +39,19 @@ export class LoginPageComponent {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      age: ['', Validators.required] 
+      name: ['', Validators.required] 
+    });
+    this.userForm = this.fb.group({
+      email: ['', Validators.required] 
     });
     this.userForm = this.fb.group({
       password: ['', Validators.required,Validators.minLength(6)] 
     });
     this.userForm = this.fb.group({
       role: ['', Validators.required] 
+    });
+    this.userForm = this.fb.group({
+      created_at: ['', Validators.required] 
     });
   }
   
@@ -65,11 +73,11 @@ export class LoginPageComponent {
   
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      age: [null, Validators.required],
-      password: [null, [Validators.required]],
+      name: [null, Validators.required],
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required,Validators.minLength(6)]],
        role: [null, [Validators.required]],
+       created_at: [null, [Validators.required]],
     })
   }
-
-
 }
