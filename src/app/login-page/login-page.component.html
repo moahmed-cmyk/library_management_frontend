@@ -11,7 +11,7 @@
             <div class="div-3">
                 <p class="p-email">Email</p>
                 <div class="div-5">
-                    <img src="assets/email-logo.svg" alt="" class="img-gmail">
+                    <img src="assets\email-logo.svg" alt="no image" class="img-gmail">  
 
                     <input type="text" placeholder="Enter your email address" formControlName="email" class="input-1">
 
@@ -28,7 +28,7 @@
             <div class="div-3">
                 <p class="p-email">Password</p>
                 <div class="div-5">
-                    <img src="assets/lock-logo.svg" alt="" class="img-lock">
+                    <img src="assets/lock-logo.svg" alt="no image" class="img-lock">
 
                     <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Enter your password"
                         formControlName="password" class="input-1">
@@ -48,8 +48,8 @@
             <select name="Select a Role" id="" class="select-1" formControlName="role">
                 <option value="">Select a Role</option>
                 <option value="admin">admin</option>
-                <option value="Librarian">Librarian</option>
-                <option value="Member">Member</option>
+                <option value="l`ibrarian">librarian</option>
+                <option value="member">member</option>
 
                 <p class="text"
                     *ngIf="(isSubmitted && userForm.get('role')?.invalid) || userForm.get('role')?.touched">
@@ -66,7 +66,7 @@
             </div>
             <button class="btn-login" type="submit">Log in</button>
 
-            <p class="p-dont" routerLink="/registerForm">Don’t have an account? <span class="span-1">Sign Up</span>
+            <p class="p-dont" routerLink="/register">Don’t have an account? <span class="span-1">Sign Up</span>
             </p>
 
         </form>
@@ -76,7 +76,7 @@
 
     <div class="div-9">
 
-        <img src="assets/4957136.jpg" alt="" class="img-login">
+        <img src="assets/4957136.jpg" alt="no image" class="img-login">
 
 
     </div>

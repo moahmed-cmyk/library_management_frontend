@@ -1,0 +1,108 @@
+<body>
+  <div class="dashboard-container">
+    <!-- Total Customers -->
+    <div class="card">
+      <div class="icon-circle">
+        <img src="https://img.icons8.com/ios-filled/50/4caf50/user-group-man-man.png" alt="Users">
+      </div>
+      <div class="card-info">
+        <p class="title">Total Customers</p>
+        <p class="count">{{ totalReservations }}</p>
+        <p class="change green">↑ 16% this month</p>
+      </div>
+    </div>
+
+    <!-- Members -->
+    <div class="card">
+      <div class="icon-circle">
+        <img src="https://img.icons8.com/ios-filled/50/f44336/user.png" alt="Members">
+      </div>
+      <div class="card-info">
+        <p class="title">Members</p>
+        <p class="count">1,893</p>
+        <p class="change red">↓ 1% this month</p>
+      </div>
+    </div>
+
+    <!-- Active Now -->
+    <div class="card">
+      <div class="icon-circle">
+        <img src="https://img.icons8.com/ios-filled/50/4caf50/monitor--v1.png" alt="Active">
+      </div>
+      <div class="card-info">
+        <p class="title">Active Now</p>
+        <p class="count">189</p>
+        <div class="avatars">
+          <img src="https://i.pravatar.cc/30?img=1" class="avatar" />
+          <img src="https://i.pravatar.cc/30?img=2" class="avatar" />
+          <img src="https://i.pravatar.cc/30?img=3" class="avatar" />
+          <img src="https://i.pravatar.cc/30?img=4" class="avatar" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="div-12">
+
+    <div class="div-11">
+      <div class="div-10">
+        <p class="p-all">All Students</p>
+        <div class="div-13">
+
+          <input type="text" placeholder="Search" class="input-search" [(ngModel)]="searchText"
+            (input)="onSearchChange()">
+          <img src="stocks-page\magnifying-glass-solid.svg" alt="no image" class="img-search">
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container">
+
+
+      <table class="student-table">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Book</th>
+            <th>ID</th>
+            <th>In Time</th>
+            <th>Out Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        @for (item of reservation; track $index) {
+
+        <tbody>
+          <tr>
+            <td>{{item.user_name}}</td>
+            <td>{{item.book_title}}</td>
+            <td>{{item.id}}</td>
+            <td>1</td>
+            <td>0</td>
+            <td><span class="status pending">{{item.status}}</span></td>
+          </tr>
+
+
+
+        </tbody>
+        }
+
+      </table>
+
+      <mat-paginator class="paginator" [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page">
+      </mat-paginator>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+</body>

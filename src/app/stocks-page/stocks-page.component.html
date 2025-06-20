@@ -2,38 +2,69 @@
 
     <div class="div-20">
         <div class="div-22">
+
             <div class="div-21">
                 <img src="stocks-page\user-tie-solid.svg" alt="no image" class="img-admin">
                 <p class="p-admin">ADMIN</p>
             </div>
 
-            <div class="div-23">
-                <button class="btn-stock">
-                    <div class="div-24">
+            <div class="div-25">
+                <div class="div-24" [ngClass]="{ 'active': selected === 'stocks' }" (click)="selectItem('stocks')" routerLink="/home">
 
-                        <div class="div-24">
-                            <img src="stocks-page\cubes-stacked-solid.svg" alt="no image" class="img-stock">
-                            <p class="p-stock">Stocks</p>
-                        </div>
-
-                        <img src="stocks-page\arrow-right-solid.svg" alt="no image" class="img-right">
+                    <div class="div-28" >
+                        <img src="stocks-page\cubes-stacked-solid.svg" alt="no image" class="img-stock">
+                        <p class="p-stock">Stocks</p>
                     </div>
-                </button>
 
+                    <img src="stocks-page\arrow-right-solid.svg" alt="no image" class="img-right">
+                </div>
 
+                <div class="div-24" [ngClass]="{ 'active': selected === 'Books' }" (click)="selectItem('Books')" routerLink="/books">
+
+                    <div class="div-28" >
+                        <img src="stocks-page\book-solid.svg" alt="no image" class="img-stock">
+                        <p class="p-stock" >Books</p>
+                    </div>
+
+                    <img src="stocks-page\arrow-right-solid.svg" alt="no image" class="img-right">
+                </div>
+
+                <div class="div-24" [ngClass]="{ 'active': selected === 'Students' }" (click)="selectItem('Students')" routerLink="/students">
+
+                    <div class="div-28">
+                        <img src="stocks-page\users-solid.svg" alt="no image" class="img-stock">
+                        <p class="p-stock">Students</p>
+                    </div>
+
+                    <img src="stocks-page\arrow-right-solid.svg" alt="no image" class="img-right">
+                </div>
+
+                <div class="div-26" [ngClass]="{ 'active': selected === 'Fine' }" (click)="selectItem('Fine')" routerLink="/fine">
+
+                    <div class="div-28">
+                        <img src="stocks-page\money-bill-1-solid.svg" alt="no image" class="img-stock">
+                        <p class="p-stock">Fine</p>
+                    </div>
+
+                    <img src="stocks-page\arrow-right-solid.svg" alt="no image" class="img-right">
+                </div>
+
+                <div class="div-26" [ngClass]="{ 'active': selected === 'Payment' }" (click)="selectItem('Payment')">
+
+                    <div class="div-28">
+                        <img src="stocks-page\credit-card-solid.svg" alt="no image" class="img-stock">
+                        <p class="p-stock">Payment</p>
+                    </div>
+
+                    <img src="stocks-page\arrow-right-solid.svg" alt="no image" class="img-right">
+                </div>
             </div>
+
 
 
         </div>
 
-
     </div>
-
-
-
-
-
-
 
 
 </main>

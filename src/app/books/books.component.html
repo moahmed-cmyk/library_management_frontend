@@ -1,0 +1,58 @@
+<body>
+
+    <div class="div-12">
+
+        <div class="div-11">
+            <div class="div-10">
+                <p class="p-all">All Books</p>
+                <div class="div-13">
+
+                    <input type="text" placeholder="Search" class="input-search" [(ngModel)]="searchText"
+                        (input)="onSearchChange()">
+                    <img src="stocks-page\magnifying-glass-solid.svg" alt="no image" class="img-search">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+
+
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>Books</th>
+                        <th>InStock</th>
+                        <th>OutofStock</th>
+                        <th>Ordered</th>
+                        <th>Pending</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                @for (item of books; track $index) {
+
+                <tbody>
+                    <tr>
+                        <td>{{item.title}}</td>
+                        <td>{{item.totalCopies}}</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td><span class="status ok">OK</span></td>
+                    </tr>
+
+
+
+                </tbody>
+                }
+
+            </table>
+
+            <mat-paginator class="paginator" [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
+        </div>
+
+    </div>
+
+</body>
+
+
