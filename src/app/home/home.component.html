@@ -3,14 +3,18 @@
     <div class="div-12">
 
         <div class="div-11">
+
             <div class="div-10">
-                <p class="p-all">All Students</p>
+                <p class="p-all">All Genre</p>
+
                 <div class="div-13">
 
                     <input type="text" placeholder="Search" class="input-search" [(ngModel)]="searchText"
                         (input)="onSearchChange()">
                     <img src="stocks-page\magnifying-glass-solid.svg" alt="no image" class="img-search">
                 </div>
+
+
             </div>
         </div>
 
@@ -20,24 +24,26 @@
             <table class="student-table">
                 <thead>
                     <tr>
-                        <th>Student Name</th>
-                        <th>Book</th>
-                        <th>In Hand</th>
-                        <th>Returned</th>
-                        <th>Missing</th>
-                        <th>Status</th>
+                        <th>Id</th>
+                        <th>Genre Name</th>
+                        <th>Actions</th>
+
                     </tr>
                 </thead>
-                @for (item of records; track $index) {
+                @for (item of genres; track $index) {
 
                 <tbody>
                     <tr>
-                        <td>{{item.users_name}}</td>
-                        <td>{{item.book_name}}</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td><span class="status ok">OK</span></td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <div class="div-005">
+                            <img src="assets\pen-solid.svg" alt="no image" 
+                                class="img-edit"   (click)="editGenre(item.id, item.name)">
+                            <img src="assets/trash-solid.svg" alt="no image" class="img-trash"
+                                (click)="deleteGenre(item.id)">
+
+                        </div>
+
                     </tr>
 
 
@@ -45,22 +51,35 @@
                 </tbody>
                 }
 
-            </table>
 
-            <mat-paginator class="paginator" [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-            </mat-paginator>
+            </table>
         </div>
 
+        <div class="div-002">
+            <button class="btn-add" (click)="openPopup()">Add Genre</button>
+        </div>
 
+        <div class="popup-backdrop" *ngIf="showPopup">
+            <div class="popup">
+                <h3>Add New Genre</h3>
+                <input type="text" [(ngModel)]="newGenre" placeholder="Enter genre name" class="input-genre" />
+                <div class="popup-buttons">
+                    <button class="btn-submit" (click)="submitGenre()">Submit</button>
+                    <button class="btn-cancel" (click)="closePopup()">Cancel</button>
+                </div>
+            </div>
+        </div>
 
+        <div class="popup-backdrop" *ngIf="showEditPopup">
+            <div class="popup">
+                <h3>Update Genre</h3>
+                <input type="text" [(ngModel)]="editedGenreName" placeholder="Enter genre name" class="input-genre" />
+                <div class="popup-buttons">
+                    <button (click)="showEditPopup = false"  (click)="submitUpdate()">Submit</button>
+                    <button (click)="cancelEdit()">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
-
-
-
-
 </body>
-
-

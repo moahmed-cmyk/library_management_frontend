@@ -10,19 +10,9 @@
     gap: 1rem;
 }
 
-.btn-add:hover {
-  background-color: #4325b5; 
-  transform: scale(1.03);
-}
-
 thead {
     text-wrap-mode: nowrap;
 }
-
-.paginator {
-    padding-block: 30px;
-}
-
 
 .img-search {
     width: 100%;
@@ -39,11 +29,17 @@ thead {
     background-color: white;
     border-radius: 20px;
     flex-direction: column;
+    width: 145%;
+
 }
 
 .p-all {
     font-weight: 600;
     font-size: 18px;
+}
+
+div {
+    display: flex;
 }
 
 .div-11 {
@@ -68,11 +64,10 @@ thead {
 
 .div-10 {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding-inline: 30px;
-    padding-block: 45px;
+    padding-inline: 22px;
+    padding-block: 28px;
 }
 
 .table-container {
@@ -107,7 +102,7 @@ thead {
 .student-table th,
 .student-table td {
     border-bottom: 1px solid #e0e0e0;
-padding-inline: 25px;
+     padding-inline: 24px;
     padding-block: 10px;
 }
 
@@ -117,7 +112,20 @@ padding-inline: 25px;
     color: gray;
 }
 
+.btn-add:hover {
+  background-color: #4325b5; 
+  transform: scale(1.03); 
+}
 
+.img-trash {
+    max-width: 13px;
+    cursor: pointer;
+}
+
+.img-edit {
+    max-width: 13px;
+    cursor: pointer;
+}
 
 .status {
     padding: 5px 12px;
@@ -168,7 +176,6 @@ tr {
     text-wrap: nowrap;
 }
 
-
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -176,6 +183,7 @@ tr {
     right: 0;
     height: 60px;
     background-color: #b40404;
+    /* red */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -245,6 +253,36 @@ tr {
     color: #888;
 }
 
+.btn-add {
+    background-color: #5932ea;
+    color: white;
+    padding-block: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    padding-inline: 20px;
+    width: fit-content;
+    align-self: end;
+    margin-right: 22px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+.div-002 {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    margin-block: 10px;
+
+}
+
+.div-005 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 13px;
+}
 
 .popup-backdrop {
   position: fixed;
@@ -373,47 +411,6 @@ tr {
   background-color: #3f23b8;
 }
 
-.btn-add {
-    background-color: #5932ea;
-    color: white;
-    padding-block: 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    border: none;
-    padding-inline: 20px;
-    width: fit-content;
-    align-self: end;
-    margin-right: 22px;
-    margin-top: 35px;
-    margin-bottom: 20px;
-}
-
-.div-002 {
-    display: flex;
-    flex-direction: column;
-    align-self: end;
-    margin-block: 10px;
-
-}
-
-.img-trash {
-    max-width: 13px;
-    cursor: pointer;
-}
-
-.img-edit {
-    max-width: 13px;
-    cursor: pointer;
-}
-.div-005 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 13px;
-}
-
-
 
 @media(max-width:1288px) {
     .p-all {
@@ -436,6 +433,8 @@ tr {
         padding-inline: 22px;
     }
 
-
-
 }
+
+
+
+

@@ -23,6 +23,7 @@ export class UsersService {
 
   constructor() { }
 
+
   loginUser(req: any): Observable<any> {
     return this.http.post('/login', req)
   }
@@ -35,14 +36,121 @@ export class UsersService {
   borrowRecords(req: any): Observable<any> {
     return this.http.post('/borrows', req)
   }
+  addBorrow(req: any): Observable<any> {
+    return this.http.post('/borrow/add', req)
+  }
   bookDetails(req: any): Observable<any> {
-    return this.http.post('/books', req)
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post('/books', req, { headers });
   }
   reservationDetails(req: any): Observable<any> {
     return this.http.post('/reservations', req)
   }
+  genreRecords(req: any): Observable<any> {
+    return this.http.post('/genres', req)
+  }
+  // reservation(req: any): Observable<any> {
+  //   return this.http.post('/reservations', req)
+  // }
+  updateBorrow(req: any): Observable<any> {
+    return this.http.post('/borrow/update', req)
+  }
+  reservationRecords(req: any): Observable<any> {
+    const token = localStorage.getItem('token');
 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
 
+    return this.http.post('/reservations', req, { headers });
+  }
+  createReservation(req: any): Observable<any> {
+    const token = localStorage.getItem('token');
 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post('/reservation/add', req, { headers });
+  }
+  deleteGenre(req: any): Observable<any> {
+    return this.http.post('/genre/delete', req)
+  }
+  deleteBook(req: any): Observable<any> {
+    return this.http.post('/books/delete', req)
+  }
+  deleteUser(req: any): Observable<any> {
+    return this.http.post('/users/delete', req)
+  }
+  userDetails(req: any): Observable<any> {
+    return this.http.post('/users', req)
+  }
+  addGenre(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    return this.http.post('/genre/add', data, headers);
+  }
+  updateGenre(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    return this.http.post('/genre/update', data, headers);
+  }
+  updateBook(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    return this.http.post('/books/update', data, headers);
+  }
+  updateUser(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    return this.http.post('/users/update', data, headers);
+  }
+  createBook(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    return this.http.post('/books/add', data, headers);
+  }
+  reservation(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+    return this.http.post('/reservations', data, headers);
+  }
+
+  getBooks(filter: any): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+  return this.http.post('/books', filter, { headers });
+}
 
 }

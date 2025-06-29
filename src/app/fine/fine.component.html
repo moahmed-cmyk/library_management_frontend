@@ -1,0 +1,109 @@
+<body>
+
+    <div class="div-12">
+
+        <div class="div-11">
+            <div class="div-10">
+                <p class="p-all">Borrow Records</p>
+                <div class="div-13">
+
+                    <input type="text" placeholder="Search user" class="input-search" [(ngModel)]="searchText"
+                        (input)="onSearchChange()">
+                    <img src="stocks-page\magnifying-glass-solid.svg" alt="no image" class="img-search">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+
+
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>User Name</th>
+                        <th>Book Name</th>
+                        <th>Issue Date</th>
+                        <th>Due Date</th>
+                        <th>Return Date</th>
+                        <th>Fine Amount</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                @for (item of records; track $index) {
+
+                <tbody>
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.users_name}}</td>
+                        <td>{{item.book_name}}</td>
+                        <td>{{ item.issue_date | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ item.due_date | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ item.return_date | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{item.fine_amount}}</td>
+                        <div class="div-005">
+                            <img src="assets\pen-solid.svg" alt="no image" class="img-edit"
+                                (click)="editBorrowRecord(item)">
+                        </div>
+
+                    </tr>
+                </tbody>
+                }
+
+            </table>
+
+            <div class="div-002">
+                <button class="btn-add" (click)="openPopup()">Add Borrow Records</button>
+            </div>
+            <div class="popup-backdrop" *ngIf="showPopup">
+                <div class="popup">
+                    <h3>Add New Borrow Record</h3>
+
+                    <input type="number" [(ngModel)]="newBorrow.user_id" placeholder="User ID" class="input-genre" />
+                    <input type="number" [(ngModel)]="newBorrow.book_id" placeholder="Book ID" class="input-genre" />
+                    <label class="input-label">Issue Date</label>
+                    <input type="date" [(ngModel)]="newBorrow.issue_date" placeholder="Issue Date"
+                        class="input-genre" />
+                    <label class="input-label">Due Date</label>
+                    <input type="date" [(ngModel)]="newBorrow.due_date" placeholder="Due Date" class="input-genre" />
+
+                    <label class="input-label">Return Date (optional)</label>
+                    <input type="date" [(ngModel)]="newBorrow.return_date" placeholder="Return Date (optional)"
+                        class="input-genre" />
+                    <input type="number" [(ngModel)]="newBorrow.fine_amount" placeholder="Fine Amount"
+                        class="input-genre" />
+
+                    <div class="popup-buttons">
+                        <button class="btn-submit" (click)="submitBorrow()">Submit</button>
+                        <button class="btn-cancel" (click)="closePopup()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-backdrop" *ngIf="showEditPopup">
+                <div class="popup">
+                    <h3>Edit Borrow Record</h3>
+
+                    <input type="number" [(ngModel)]="editBorrow.user_id" placeholder="User ID" class="input-genre" />
+                    <input type="number" [(ngModel)]="editBorrow.book_id" placeholder="Book ID" class="input-genre" />
+                    <label>Issue Date</label>
+                    <input type="date" [(ngModel)]="editBorrow.issue_date" class="input-genre" />
+                    <label>Due Date</label>
+                    <input type="date" [(ngModel)]="editBorrow.due_date" class="input-genre" />
+                    <label>Return Date</label>
+                    <input type="date" [(ngModel)]="editBorrow.return_date" class="input-genre" />
+                    <input type="number" [(ngModel)]="editBorrow.fine_amount" placeholder="Fine Amount"
+                        class="input-genre" />
+
+                    <div class="popup-buttons">
+                        <button class="btn-submit" (click)="submitUpdate()">Update</button>
+                        <button class="btn-cancel" (click)="closePopup()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>

@@ -8,6 +8,8 @@
 }
 
 
+
+
 .select-1 {
     width: 100%;
     padding-block: 12px;
@@ -70,22 +72,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 15px;
 }
 
 main {
-    background: linear-gradient(135deg, #1f4037, #99f2c8);
     min-height: 100vh;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
-    padding-block: 20px;
 }
 
 .input-3 {
-    width: 97%;
+    width: 100%;
     padding-block: 12px;
     border-radius: 8px;
     font-size: 14px;
@@ -103,26 +103,13 @@ main {
 }
 
 .p-login {
-    font-size: 34px;
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 19px;
+    color: #3341bf;
+    font-size: 30px;
 }
 
-.glass-card {
-    background: linear-gradient(135deg, rgba(153, 242, 200, 0.15), rgba(31, 64, 55, 0.05));
-    /* mint to deep green tint */
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 64, 43, 0.37);
-    /* deeper green shadows */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(153, 242, 200, 0.25);
-    /* minty green border */
-    color: #eafff5;
-    /* soft aqua-white text */
-}
 
 span {
     font-size: 13px;
@@ -139,12 +126,11 @@ span {
 
 
 .p-email {
-    color: white;
-    ght: 400;
     margin-bottom: 7px;
     font-size: 15px;
     margin-top: 0;
     font-weight: 500;
+    color: black;
 }
 
 .img-lock {
@@ -174,24 +160,19 @@ span {
 }
 
 .btn-login {
-    background: linear-gradient(135deg, #32e2b8, #178f78);
-    /* minty green gradient */
-    color: white;
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 15px rgba(0, 64, 43, 0.2);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background-color: #3341bf;
     width: 100%;
+    color: white;
+    padding-block: 10px;
+    border-radius: 14px;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .btn-login:hover {
-    background: linear-gradient(135deg, #3fffd3, #1fa289);
-    box-shadow: 0 6px 20px rgba(0, 64, 43, 0.4);
-    transform: translateY(-2px);
+    opacity: 0.7;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
 
@@ -326,7 +307,7 @@ span {
     padding-block: 17px;
 }
 
-
+/* 
 @media(max-width:1189px) {
 
     .img-back {
@@ -340,12 +321,18 @@ span {
     .div-10 {
         left: 5rem;
     }
-}
+} */
 
 
 @media(max-width:963px) {
     main {
         gap: 2rem;
+    }
+}
+
+@media(max-width:1102px) {
+    .p-login {
+        margin-bottom: 19px;
     }
 }
 
@@ -409,7 +396,7 @@ span {
     }
 
     .input-3 {
-        width: 212px;
+        width: 100%;
         padding-block: 5px;
         border-radius: 8px;
         font-size: 11px;
@@ -447,6 +434,9 @@ span {
         padding-block: 7px;
         border-radius: 8px;
         font-size: 12px;
+        margin-bottom: 4px;
+        margin-top: 4px;
+
     }
 
     .glass-card {
@@ -459,7 +449,7 @@ span {
     }
 
     .input-1 {
-        width: 192px;
+        width: 100%;
     }
 
     .p-dont {

@@ -6,6 +6,7 @@ import { Component, inject } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -30,40 +31,12 @@ export class LoginPageComponent {
     });
   }
 
-
-
   usersService: UsersService = inject(UsersService);
   authService: AuthService = inject(AuthService)
-
-
-
+    toaster=inject(ToastrService)
 
   email = '';
   password = '';
-
-
-  // login() {
-  //   const data = {
-  //     email: this.email,
-  //     password: this.password
-  //   };
-
-  //   this.usersService.loginUser(data).subscribe({
-  //     next: (res: any) => {
-  //       if (res.status === 200) {
-  //         this.router.navigate(['/home']);
-  //       } else if (res.status === 210) {
-  //         alert('Password incorrect');
-  //       } else if (res.status === 404) {
-  //         alert('User not found');
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('Login error:', err);
-  //       alert('Server error occurred');
-  //     }
-  //   });
-  // }
 
   loginUser(data: any): void {
     this.usersService.loginUser(data).subscribe({
@@ -71,12 +44,13 @@ export class LoginPageComponent {
         console.log(res);
 
         if (res.token) {
-          localStorage.setItem('token', res.token);  // ✅ Save token
+          localStorage.setItem('token', res.token);  
         }
 
         if (res.account === true) {
-          this.authService.setUser(res); // Store in memory
-          this.router.navigate(['/home']);
+          this.authService.setUser(res); 
+          this.router.navigate(['/genre']);
+             this.toaster.success("Login successfully!", "Success");
         } else {
           alert('Login failed. Invalid account.');
         }
@@ -86,8 +60,6 @@ export class LoginPageComponent {
       }
     });
   }
-
-
 
 
   togglePasswordVisibility() {
@@ -112,6 +84,5 @@ export class LoginPageComponent {
       role: [null, [Validators.required]],
     })
   }
-
 
 }

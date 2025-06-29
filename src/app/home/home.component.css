@@ -1,20 +1,10 @@
-:root {
-    @include mat.paginator-overrides((container-text-color: orange,
-            container-background-color: red,
-        ));
-}
-
-
 .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* center horizontally */
     justify-content: flex-start;
-    /* push content to the top */
     min-height: 100vh;
     background-color: #f6f6fc;
-    /* adjust to your desired background */
     padding: 1rem;
     gap: 1rem;
 }
@@ -22,11 +12,6 @@
 thead {
     text-wrap-mode: nowrap;
 }
-
-.paginator {
-    padding-block: 30px;
-}
-
 
 .img-search {
     width: 100%;
@@ -36,12 +21,6 @@ thead {
     right: 165px;
 }
 
-/* body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
 .div-12 {
     display: flex;
     align-items: center;
@@ -49,11 +28,18 @@ thead {
     background-color: white;
     border-radius: 20px;
     flex-direction: column;
+    width: 145%;
+    box-shadow: 0 0 1px lightgray;
+
 }
 
 .p-all {
     font-weight: 600;
     font-size: 18px;
+}
+
+div {
+    display: flex;
 }
 
 .div-11 {
@@ -78,11 +64,15 @@ thead {
 
 .div-10 {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding-inline: 40px;
-    padding-block: 25px;
+    padding-inline: 22px;
+    padding-block: 28px;
+}
+
+.btn-add:hover {
+    background-color: #4325b5;
+    transform: scale(1.03);
 }
 
 .table-container {
@@ -127,6 +117,15 @@ thead {
     color: gray;
 }
 
+.img-trash {
+    max-width: 13px;
+    cursor: pointer;
+}
+
+.img-edit {
+    max-width: 13px;
+    cursor: pointer;
+}
 
 
 .status {
@@ -177,10 +176,6 @@ tr {
     text-align: center;
     text-wrap: nowrap;
 }
-
-
-
-
 
 
 .bottom-nav {
@@ -260,8 +255,163 @@ tr {
     color: #888;
 }
 
+.btn-add {
+    background-color: #5932ea;
+    color: white;
+    padding-block: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    padding-inline: 20px;
+    width: fit-content;
+    align-self: end;
+    margin-right: 22px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
 
+.div-002 {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    margin-block: 10px;
 
+}
+
+.div-005 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 13px;
+}
+
+.popup-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.popup {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.popup h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.input-genre {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-submit,
+.btn-cancel {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit {
+    background-color: #5932ea;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    background-color: #4325b5;
+}
+
+.btn-cancel {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background-color: #ddd;
+}
+
+.popup-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.input-genre {
+    width: 100%;
+    padding: 10px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.popup-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5932ea;
+    color: white;
+    cursor: pointer;
+}
+
+.popup-buttons button:hover {
+    background-color: #3f23b8;
+}
 
 
 @media(max-width:1288px) {
@@ -284,7 +434,5 @@ tr {
         font-size: 13px;
         padding-inline: 22px;
     }
-
-
 
 }

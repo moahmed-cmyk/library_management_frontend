@@ -6,12 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './register-page.component.html',
-  styleUrl: './register-page.component.css'
+  styleUrl: './register-page.component.css',
 })
 export class RegisterPageComponent {
 
@@ -26,15 +27,19 @@ export class RegisterPageComponent {
   registerForm: any;
 
   toaster=inject(ToastrService)
+    router = inject(Router);
 
   registerUser(data: any): void {
     this.usersService.registerUser(data).subscribe({
       next: (res: any) => {
         console.log(res);
         this.users = res
+           this.toaster.success("Registered successfully!", "Success");
+        this.router.navigate(['/login']); 
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
+          this.toaster.error(err.error.message || "Registration failed", "Error");
 
       }
     })
@@ -49,9 +54,6 @@ export class RegisterPageComponent {
     });
     this.userForm = this.fb.group({
       password: ['', Validators.required, Validators.minLength(6)]
-    });
-    this.userForm = this.fb.group({
-      role: ['', Validators.required]
     });
     this.userForm = this.fb.group({
       created_at: ['', Validators.required]

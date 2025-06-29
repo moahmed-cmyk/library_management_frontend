@@ -20,24 +20,35 @@
             <table class="student-table">
                 <thead>
                     <tr>
-                        <th>Books</th>
-                        <th>InStock</th>
-                        <th>OutofStock</th>
-                        <th>Ordered</th>
-                        <th>Pending</th>
-                        <th>Status</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Author Name</th>
+                        <th>Genre Name</th>
+                        <th>Total Copies</th>
+                        <th>Available Copies</th>
+                        <th>Created at</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 @for (item of books; track $index) {
 
                 <tbody>
                     <tr>
+                        <td>{{item.id}}</td>
                         <td>{{item.title}}</td>
+                        <td>{{item.authorName}}</td>
+                        <td>{{item.name}}</td>
                         <td>{{item.totalCopies}}</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td><span class="status ok">OK</span></td>
+                        <td>{{item.availableCopies}}</td>
+                        <td>{{item.createAt}}</td>
+                        <div class="div-005">
+                            <img src="assets\pen-solid.svg" alt="no image" class="img-edit"
+                                (click)="editGenre(item.id, item.name)">
+                            <img src="assets/trash-solid.svg" alt="no image" class="img-trash"
+                                (click)="deleteBook(item.id)">
+
+                        </div>
+
                     </tr>
 
 
@@ -47,12 +58,53 @@
 
             </table>
 
-            <mat-paginator class="paginator" [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-            </mat-paginator>
+            <div class="div-002">
+                <button class="btn-add" (click)="openPopup()">Add Book</button>
+            </div>
+
+            <div class="popup-backdrop" *ngIf="showPopup">
+                <div class="popup">
+                    <h3>Add New Book</h3>
+                    <input type="text" [(ngModel)]="newBook.title" placeholder="Title" class="input-genre" />
+                    <input type="text" [(ngModel)]="newBook.author_name" placeholder="Author Name"
+                        class="input-genre" />
+                    <input type="number" [(ngModel)]="newBook.genre_id" placeholder="Genre ID" class="input-genre" />
+                    <input type="number" [(ngModel)]="newBook.total_copies" placeholder="Total Copies"
+                        class="input-genre" />
+                    <input type="number" [(ngModel)]="newBook.available_copies" placeholder="Available Copies"
+                        class="input-genre" />
+                    <input type="date" [(ngModel)]="newBook.created_at" placeholder="Created At" class="input-genre" />
+
+                    <div class="popup-buttons">
+                        <button class="btn-submit" (click)="submitBook()">Submit</button>
+                        <button class="btn-cancel" (click)="closePopup()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-backdrop" *ngIf="showEditPopup">
+                <div class="popup">
+                    <h3>Update Book Details</h3>
+                    <input type="number" [(ngModel)]="editedBook.id" class="input-genre" placeholder="Enter Id">
+
+                    <input type="text" [(ngModel)]="editedBook.title" placeholder="Title" class="input-genre" />
+                    <input type="text" [(ngModel)]="editedBook.author_name" placeholder="Author Name"
+                        class="input-genre" />
+                    <input type="number" [(ngModel)]="editedBook.genre_id" placeholder="Genre ID" class="input-genre" />
+                    <input type="number" [(ngModel)]="editedBook.total_copies" placeholder="Total Copies"
+                        class="input-genre" />
+                    <input type="number" [(ngModel)]="editedBook.available_copies" placeholder="Available Copies"
+                        class="input-genre" />
+                    <input type="date" [(ngModel)]="editedBook.created_at" placeholder="created_at "
+                        class="input-genre" />
+                    <div class="popup-buttons">
+                        <button (click)="submitBookUpdate()">Submit</button>
+                        <button (click)="cancelEdit()">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 
 </body>
-
-

@@ -1,0 +1,59 @@
+<body>
+
+    <div class="div-12">
+
+        <div class="div-11">
+            <div class="div-10">
+                <p class="p-all">All Users</p>
+                <div class="div-13">
+
+                    <input type="text" placeholder="Search" class="input-search" [(ngModel)]="searchText"
+                        (input)="onSearchChange()">
+                    <img src="stocks-page\magnifying-glass-solid.svg" alt="no image" class="img-search">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+
+
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>created At</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                @for (item of users; track $index) {
+
+                <tbody>
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.role}}</td>
+                        <td>{{item.created_at| date: 'yyyy-MM-dd' }}</td>
+
+                        <div class="div-005">
+  
+                            <img src="assets/trash-solid.svg" alt="no image" class="img-trash"
+                                (click)="deleteUser(item.id)">
+
+                        </div>
+
+                    </tr>
+
+                </tbody>
+                }
+
+            </table>
+        </div>
+
+    </div>
+
+</body>

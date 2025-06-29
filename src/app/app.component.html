@@ -1,6 +1,9 @@
-<div class="div-50">
-    <app-stocks-page></app-stocks-page>
 
-    <router-outlet></router-outlet>
+<router-outlet *ngIf="isAuthPage()"></router-outlet>
+
+<div class="div-50" *ngIf="!isAuthPage()">
+    <app-stocks-page *ngIf="shouldShowStocksPage()"></app-stocks-page>
+
+    <router-outlet ></router-outlet>
 
 </div>

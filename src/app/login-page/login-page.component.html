@@ -1,5 +1,5 @@
 <main>
-    a
+
     <div class="div-15">
         <div>
 
@@ -12,7 +12,7 @@
             <div class="div-3">
                 <p class="p-email">Email</p>
                 <div class="div-5">
-                    <img src="assets\email-logo.svg" alt="no image" class="img-gmail">  
+                    <img src="public\envelope-solid.svg" alt="no image" class="img-gmail">  
 
                     <input type="text" placeholder="Enter your email address" formControlName="email" class="input-1">
 
@@ -46,19 +46,6 @@
 
             </div>
 
-            <select name="Select a Role" id="" class="select-1" formControlName="role">
-                <option value="">Select a Role</option>
-                <option value="admin">admin</option>
-                <option value="l`ibrarian">librarian</option>
-                <option value="member">member</option>
-
-                <p class="text"
-                    *ngIf="(isSubmitted && userForm.get('role')?.invalid) || userForm.get('role')?.touched">
-                    <span *ngIf="userForm.get('role')?.hasError('required')">The Field is Required
-                    </span>
-                </p>
-
-            </select>
 
             <div class="div-6">
 
@@ -73,17 +60,8 @@
         </form>
     </div>
 
-
-
     <div class="div-9">
-
         <img src="assets/4957136.jpg" alt="no image" class="img-login">
-
-
     </div>
-
-
-
-    <!-- <button (click)="loginUser()"></button> -->
 
 </main>
