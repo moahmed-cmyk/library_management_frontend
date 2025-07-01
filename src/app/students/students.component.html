@@ -97,6 +97,36 @@
       </div>
     </div>
 
+    <div class="popup-backdrop" *ngIf="showEditPopup">
+      <div class="popup">
+        <h3>Update Reservation Details</h3>
+
+        <select [(ngModel)]="editReservation.user_name" class="input-genre">
+          <option value="" disabled>Select User</option>
+          <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+        </select>
+
+        <select [(ngModel)]="editReservation.book_title" class="input-genre">
+          <option value="" disabled>Select Book</option>
+          <option *ngFor="let book of books" [value]="book.id">{{ book.title }}</option>
+        </select>
+
+        <select [(ngModel)]="editReservation.status" class="input-genre">
+          <option value="" disabled>Select Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+        </select>
+
+        <input type="date" [(ngModel)]="editReservation.reserved_at" placeholder="Reserved Date" class="input-genre" />
+
+        <div class="popup-buttons">
+          <button (click)="submitReservationUpdate()">Submit</button>
+          <button (click)="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 
 </body>

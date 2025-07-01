@@ -65,8 +65,8 @@ export class StudentsComponent {
 
   editReservation = {
     id: null as number | null,
-    user_id: null as number | null,
-    book_id: null as number | null,
+    user_name: null as number | null,
+    book_title: null as number | null,
     status: '',
     reserved_at: ''
   };
@@ -74,28 +74,30 @@ export class StudentsComponent {
   openEditReservation(reservation: any) {
     this.editReservation = {
       id: reservation.id,
-      user_id: Number(reservation.user_id),
-      book_id: Number(reservation.book_id),
+      user_name: Number(reservation.user_name),
+      book_title: Number(reservation.book_title),
       status: reservation.status,
-      reserved_at: reservation.reserved_at.split('T')[0] 
+      reserved_at: reservation.reserved_at.split('T')[0] // remove time part if needed
     };
     this.showEditPopup = true;
   }
 
   submitReservationUpdate() {
-  const { user_id, book_id, status, reserved_at, id } = this.editReservation;
+  const { user_name, book_title, status, reserved_at, id } = this.editReservation;
 
-  if (!user_id || !book_id || !status.trim() || !reserved_at) {
+  if (!user_name || !book_title || !status.trim() || !reserved_at) {
     this.toaster.error("Please fill in all fields!", "Validation Error");
     return;
   }
-console.log("Updating reservation with data:", this.editReservation);
+
   this.usersService.updateReservation(this.editReservation).subscribe({
     next: (res) => {
-      if (res.affectedRows >= 0) {
+      console.log(res);
+      
+      if (res.affectedRows > 0) {
         this.toaster.success("Reservation updated!", "Success");
         this.showEditPopup = false;
-        this.reservationRecords(); 
+        this.reservationRecords(); // reload table
       } else {
         this.toaster.error("Update failed!", "Error");
       }
