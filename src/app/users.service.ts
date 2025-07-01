@@ -146,11 +146,27 @@ export class UsersService {
   }
 
   getBooks(filter: any): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
-  });
-  return this.http.post('/books', filter, { headers });
-}
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post('/books', filter, { headers });
+  }
+
+  genreList(filter: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post('/genres', filter, { headers });
+  }
+  updateReservation(filter: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post('/reservation/update', filter, { headers });
+  }
+
 
 }

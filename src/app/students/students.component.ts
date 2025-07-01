@@ -18,7 +18,6 @@ export class StudentsComponent {
   allData = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
   paginatedData: string[] = [];
 
-  // Paginator settings
   length = 100;
   pageSize = 10;
   pageIndex = 0;
@@ -29,11 +28,14 @@ export class StudentsComponent {
 
   searchText: string = '';
   dataSource: any[] = [];
+  users: any[] = [];
+  books: any[] = [];
   allRecords: any[] = [];
   genres: any[] = [];
   data: any[] = [];
   showPopup = false;
   newGenre = '';
+
 
   usersService: UsersService = inject(UsersService)
   authService: AuthService = inject(AuthService)
@@ -53,11 +55,58 @@ export class StudentsComponent {
   ngOnInit(): void {
     document.body.style.backgroundColor = "#f9f8fd"
     this.reservationRecords();
+    this.loadUserDetail();
+    this.loadBookDetail();
 
   }
 
   showEditPopup = false;
   editedGenreName = '';
+
+  editReservation = {
+    id: null as number | null,
+    user_id: null as number | null,
+    book_id: null as number | null,
+    status: '',
+    reserved_at: ''
+  };
+
+  openEditReservation(reservation: any) {
+    this.editReservation = {
+      id: reservation.id,
+      user_id: Number(reservation.user_id),
+      book_id: Number(reservation.book_id),
+      status: reservation.status,
+      reserved_at: reservation.reserved_at.split('T')[0] 
+    };
+    this.showEditPopup = true;
+  }
+
+  submitReservationUpdate() {
+  const { user_id, book_id, status, reserved_at, id } = this.editReservation;
+
+  if (!user_id || !book_id || !status.trim() || !reserved_at) {
+    this.toaster.error("Please fill in all fields!", "Validation Error");
+    return;
+  }
+console.log("Updating reservation with data:", this.editReservation);
+  this.usersService.updateReservation(this.editReservation).subscribe({
+    next: (res) => {
+      if (res.affectedRows >= 0) {
+        this.toaster.success("Reservation updated!", "Success");
+        this.showEditPopup = false;
+        this.reservationRecords(); 
+      } else {
+        this.toaster.error("Update failed!", "Error");
+      }
+    },
+    error: (err) => {
+      console.error('Error updating reservation:', err);
+      this.toaster.error("Server error!", "Error");
+    }
+  });
+}
+
 
 
 
@@ -108,29 +157,13 @@ export class StudentsComponent {
         console.log('Genre added:', res);
         this.closePopup();
         this.reservationRecords();
-                this.toaster.success("Genre Added successfully!", "Success");
+        this.toaster.success("Genre Added successfully!", "Success");
       },
       error: (err) => {
         console.error('Error adding genre:', err);
       }
     });
   }
-
-  deleteGenre(id: number): void {
-    if (confirm("Are you sure you want to delete this genre?")) {
-      this.usersService.deleteGenre({ id }).subscribe({
-        next: (res) => {
-          console.log('Deleted:', res);
-          this.reservationRecords();
-  
-        },
-        error: (err) => {
-          console.error('Error deleting genre:', err);
-        }
-      });
-    }
-  }
-
 
   onSearchChange(): void {
     this.reservationRecords(this.searchText);
@@ -143,7 +176,7 @@ export class StudentsComponent {
     this.usersService.reservationRecords(payload).subscribe({
       next: (res) => {
         console.log('ReservationRecords:', res);
-     this.data = res.data;
+        this.data = res.data;
       },
       error: (err) => {
         console.error('Error fetching borrow records:', err);
@@ -153,33 +186,69 @@ export class StudentsComponent {
 
 
   newReservation = {
-  user_id: null,
-  book_id: null,
-  status: '',
-  reserved_at: ''
-};
+    user_id: '',
+    book_id: '',
+    status: '',
+    reserved_at: ''
+  };
 
-submitReservation() {
-  const { user_id, book_id, status, reserved_at } = this.newReservation;
+  submitReservation() {
+    const { user_id, book_id, status, reserved_at } = this.newReservation;
 
-  if (!user_id || !book_id || !status.trim() || !reserved_at) {
-    this.toaster.error("Please fill in all fields!", "Validation Error");
-    return;
+    if (!user_id || !book_id || !status.trim() || !reserved_at) {
+      this.toaster.error("Please fill in all fields!", "Validation Error");
+      return;
+    }
+
+    this.usersService.createReservation(this.newReservation).subscribe({
+      next: (res) => {
+        console.log("Reservation API response:", res);
+        if (res.status === 'book not available') {
+          this.toaster.error("Book is not available for reservation!", "Reservation Failed");
+          return;
+        }
+
+        if (res.status === 'success') {
+          this.toaster.success("Reservation created!", "Success");
+          this.closePopup();
+          this.reservationRecords();
+          return;
+        }
+
+        this.toaster.error("Reservation failed. Try again.", "Error");
+
+      },
+      error: (err) => {
+        console.error('Error creating reservation:', err);
+        this.toaster.error("Failed to create reservation!", "Error");
+      }
+    });
   }
 
-  this.usersService.createReservation(this.newReservation).subscribe({
-    next: (res) => {
-      this.toaster.success("Reservation created!", "Success");
-      this.closePopup();
-      this.reservationRecords(); 
-    },
-    error: (err) => {
-      console.error('Error creating reservation:', err);
-      this.toaster.error("Failed to create reservation!", "Error");
-    }
-  });
-}
+  loadUserDetail(): void {
+    const payload = { offset: 0, limit: 100 };
+    this.usersService.userDetails(payload).subscribe({
+      next: (res) => {
+        console.log('Genres loaded:', res);
+        this.users = res;
+      },
+      error: (err) => {
+        console.error('Error fetching genres:', err);
+      }
+    });
+  }
 
-
+  loadBookDetail(): void {
+    const payload = { offset: 0, limit: 100 };
+    this.usersService.bookDetails(payload).subscribe({
+      next: (res) => {
+        console.log('books loaded:', res);
+        this.books = res;
+      },
+      error: (err) => {
+        console.error('Error fetching genres:', err);
+      }
+    });
+  }
 
 }

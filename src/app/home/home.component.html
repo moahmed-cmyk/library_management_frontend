@@ -36,13 +36,13 @@
                     <tr>
                         <td>{{item.id}}</td>
                         <td>{{item.name}}</td>
-                        <div class="div-005">
+                        <td class="div-005">
                             <img src="assets\pen-solid.svg" alt="no image" 
                                 class="img-edit"   (click)="editGenre(item.id, item.name)">
                             <img src="assets/trash-solid.svg" alt="no image" class="img-trash"
                                 (click)="deleteGenre(item.id)">
 
-                        </div>
+                        </td>
 
                     </tr>
 
@@ -62,7 +62,7 @@
         <div class="popup-backdrop" *ngIf="showPopup">
             <div class="popup">
                 <h3>Add New Genre</h3>
-                <input type="text" [(ngModel)]="newGenre" placeholder="Enter genre name" class="input-genre" />
+                <input type="text" [(ngModel)]="newGenre"    pattern="^[a-zA-Z\s'.-]{2,50}$" placeholder="Enter genre name" class="input-genre" />
                 <div class="popup-buttons">
                     <button class="btn-submit" (click)="submitGenre()">Submit</button>
                     <button class="btn-cancel" (click)="closePopup()">Cancel</button>

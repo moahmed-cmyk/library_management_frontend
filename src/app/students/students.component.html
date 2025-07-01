@@ -41,11 +41,9 @@
             <td>{{item.book_title}}</td>
             <td>{{item.reserved_at| date: 'yyyy-MM-dd'}}</td>
             <td>{{item.status}}</td>
-            <div class="div-005">
+            <td class="div-005">
               <img src="assets\pen-solid.svg" alt="no image" class="img-edit" (click)="editGenre(item.id, item.name)">
-              <img src="assets/trash-solid.svg" alt="no image" class="img-trash" (click)="deleteGenre(item.id)">
-
-            </div>
+            </td>
 
           </tr>
 
@@ -65,29 +63,39 @@
 
     <div class="div-002">
       <button class="btn-add" (click)="openPopup()">Add Reservation</button>
-
-
-
     </div>
 
-<div class="popup-backdrop" *ngIf="showPopup">
-  <div class="popup">
-    <h3>Add New Reservation</h3>
 
-    <input type="number" [(ngModel)]="newReservation.user_id" placeholder="User ID" class="input-genre" />
 
-    <input type="number" [(ngModel)]="newReservation.book_id" placeholder="Book ID" class="input-genre" />
 
-    <input type="text" [(ngModel)]="newReservation.status" placeholder="Status (e.g., pending)" class="input-genre" />
+    <div class="popup-backdrop" *ngIf="showPopup">
+      <div class="popup">
+        <h3>Add New Reservation</h3>
 
-    <input type="date" [(ngModel)]="newReservation.reserved_at" placeholder="Reserved Date" class="input-genre" />
+        <select [(ngModel)]="newReservation.user_id" class="input-genre">
+          <option value="" disabled>Select User</option>
+          <option *ngFor="let item of users" [value]="item.id">{{ item.name }}</option>
+        </select>
 
-    <div class="popup-buttons">
-      <button class="btn-submit" (click)="submitReservation()">Submit</button>
-      <button class="btn-cancel" (click)="closePopup()">Cancel</button>
+        <select [(ngModel)]="newReservation.book_id" class="input-genre">
+          <option value="" disabled>Select Book</option>
+          <option *ngFor="let item of books" [value]="item.id">{{ item.title }}</option>
+        </select>
+
+        <select [(ngModel)]="newReservation.status" class="input-genre">
+          <option value="" disabled>Select Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+        </select>
+
+        <input type="date" [(ngModel)]="newReservation.reserved_at" placeholder="Reserved Date" class="input-genre" />
+
+        <div class="popup-buttons">
+          <button class="btn-submit" (click)="submitReservation()">Submit</button>
+          <button class="btn-cancel" (click)="closePopup()">Cancel</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
   </div>
 

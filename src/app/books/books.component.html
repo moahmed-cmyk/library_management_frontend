@@ -1,5 +1,4 @@
 <body>
-    a
 
     <div class="div-12">
 
@@ -42,13 +41,13 @@
                         <td>{{item.totalCopies}}</td>
                         <td>{{item.availableCopies}}</td>
                         <td>{{item.createAt}}</td>
-                        <div class="div-005">
+                        <td class="div-005">
                             <img src="assets\pen-solid.svg" alt="no image" class="img-edit"
                                 (click)="editGenre(item.id, item.name)">
                             <img src="assets/trash-solid.svg" alt="no image" class="img-trash"
                                 (click)="deleteBook(item.id)">
 
-                        </div>
+                        </td>
 
                     </tr>
 
@@ -69,7 +68,12 @@
                     <input type="text" [(ngModel)]="newBook.title" placeholder="Title" class="input-genre" />
                     <input type="text" [(ngModel)]="newBook.author_name" placeholder="Author Name"
                         class="input-genre" />
-                    <input type="number" [(ngModel)]="newBook.genre_id" placeholder="Genre ID" class="input-genre" />
+                    <select [(ngModel)]="newBook.genre_name" class="input-genre">
+                        <option value="" disabled selected>Select Genre</option>
+                        <option *ngFor="let genre of genres" [value]="genre.name">{{ genre.name }}</option>
+                    </select>
+
+
                     <input type="number" [(ngModel)]="newBook.total_copies" placeholder="Total Copies"
                         class="input-genre" />
                     <input type="number" [(ngModel)]="newBook.available_copies" placeholder="Available Copies"
@@ -86,12 +90,10 @@
             <div class="popup-backdrop" *ngIf="showEditPopup">
                 <div class="popup">
                     <h3>Update Book Details</h3>
-                    <input type="number" [(ngModel)]="editedBook.id" class="input-genre" placeholder="Enter Id">
 
                     <input type="text" [(ngModel)]="editedBook.title" placeholder="Title" class="input-genre" />
                     <input type="text" [(ngModel)]="editedBook.author_name" placeholder="Author Name"
                         class="input-genre" />
-                    <input type="number" [(ngModel)]="editedBook.genre_id" placeholder="Genre ID" class="input-genre" />
                     <input type="number" [(ngModel)]="editedBook.total_copies" placeholder="Total Copies"
                         class="input-genre" />
                     <input type="number" [(ngModel)]="editedBook.available_copies" placeholder="Available Copies"

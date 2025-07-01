@@ -20,11 +20,12 @@ thead {
 
 .img-search {
     width: 100%;
-    max-width: 15px;
+    max-width: 14px;
     position: absolute;
     top: 7px;
-    right: 165px;
+    right: 158px;
 }
+
 
 
 .div-12 {
@@ -50,10 +51,10 @@ thead {
 .input-search {
     border: none;
     background-color: aliceblue;
-    padding-block: 8px;
-    font-size: 13px;
+    padding-block: 6px;
+    font-size: 12px;
     border-radius: 4px;
-    padding-left: 35px;
+    padding-left: 25px;
     outline: none;
 }
 
@@ -66,8 +67,8 @@ thead {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding-inline: 30px;
-    padding-block: 45px;
+    padding-inline: 32px;
+    padding-block: 28px;
 }
 
 .table-container {
@@ -110,7 +111,7 @@ thead {
 .student-table th,
 .student-table td {
     border-bottom: 1px solid #e0e0e0;
-    padding-inline: 21px;
+   padding-inline: 30px;
     padding-block: 10px;
 }
 

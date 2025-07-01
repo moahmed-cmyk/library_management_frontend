@@ -42,10 +42,10 @@
                         <td>{{ item.due_date | date: 'yyyy-MM-dd' }}</td>
                         <td>{{ item.return_date | date: 'yyyy-MM-dd' }}</td>
                         <td>{{item.fine_amount}}</td>
-                        <div class="div-005">
+                        <td class="div-005">
                             <img src="assets\pen-solid.svg" alt="no image" class="img-edit"
                                 (click)="editBorrowRecord(item)">
-                        </div>
+                        </td>
 
                     </tr>
                 </tbody>
@@ -60,8 +60,16 @@
                 <div class="popup">
                     <h3>Add New Borrow Record</h3>
 
-                    <input type="number" [(ngModel)]="newBorrow.user_id" placeholder="User ID" class="input-genre" />
-                    <input type="number" [(ngModel)]="newBorrow.book_id" placeholder="Book ID" class="input-genre" />
+                    <select [(ngModel)]="newBorrow.user_id" class="input-genre">
+                        <option value="" disabled>Select User</option>
+                        <option *ngFor="let item of users" [value]="item.id">{{ item.name }}</option>
+                    </select>
+
+                    <select [(ngModel)]="newBorrow.book_id" class="input-genre">
+                        <option value="" disabled>Select Book</option>
+                        <option *ngFor="let item of books" [value]="item.id">{{ item.title }}</option>
+                    </select>
+
                     <label class="input-label">Issue Date</label>
                     <input type="date" [(ngModel)]="newBorrow.issue_date" placeholder="Issue Date"
                         class="input-genre" />
@@ -81,12 +89,20 @@
                 </div>
             </div>
 
-            <div class="popup-backdrop" *ngIf="showEditPopup">
+         <div class="popup-backdrop" *ngIf="showEditPopup">
                 <div class="popup">
                     <h3>Edit Borrow Record</h3>
 
-                    <input type="number" [(ngModel)]="editBorrow.user_id" placeholder="User ID" class="input-genre" />
-                    <input type="number" [(ngModel)]="editBorrow.book_id" placeholder="Book ID" class="input-genre" />
+                    <select [(ngModel)]="editBorrow.user_id" class="input-genre">
+                        <option value="" disabled>Select User</option>
+                        <option *ngFor="let item of users" [value]="item.id">{{ item.name }}</option>
+                    </select>
+
+                    <select [(ngModel)]="editBorrow.book_id" class="input-genre">
+                        <option value="" disabled>Select Book</option>
+                        <option *ngFor="let item of books" [value]="item.id">{{ item.title }}</option>
+                    </select>
+
                     <label>Issue Date</label>
                     <input type="date" [(ngModel)]="editBorrow.issue_date" class="input-genre" />
                     <label>Due Date</label>

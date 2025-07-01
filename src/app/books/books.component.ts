@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class BooksComponent {
 
 
+
   users: any[] = []
   records: any[] = []
   searchText: string = '';
@@ -25,13 +26,18 @@ export class BooksComponent {
   newGenre = '';
 
   newBook = {
-  title: '',
-  author_name: '',
-  genre_id: null,
-  total_copies: null,
-  available_copies: null,
-  created_at: ''
-};
+    title: '',
+    author_name: '',
+    genre_name: '',
+    total_copies: null,
+    available_copies: null,
+    created_at: ''
+  };
+  closePopup() {
+    this.showPopup = false;
+  }
+
+
 
   totalItems: number = 0;
   pageSize: number = 10;
@@ -40,54 +46,59 @@ export class BooksComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   router: Router = inject(Router);
+  submitBook() {
+    const b = this.newBook;
 
-submitBook() {
-  const b = this.newBook;
+    if (
+      !b.title?.trim() ||
+      !b.author_name?.trim() ||
+      !b.genre_name?.trim() ||
+      !b.total_copies ||
+      !b.available_copies ||
+      !b.created_at
+    ) {
+      this.toaster.error("All fields are required!", "Validation Error");
+      return;
+    }
 
-  if (
-    !b.title.trim() ||
-    !b.author_name.trim() ||
-    !b.genre_id ||
-    !b.total_copies ||
-    !b.available_copies ||
-    !b.created_at
-  ) {
-    this.toaster.error("All fields are required!", "Validation Error");
-    return;
+    this.usersService.createBook(this.newBook).subscribe({
+      next: (res) => {
+        console.log('Book created:', res);
+
+        this.closePopup();
+        this.bookDetails();
+        this.toaster.success("Book added successfully!", "Success");
+      },
+      error: (err) => {
+        console.error('Error creating book:', err);
+        this.toaster.error("Failed to add book!", "Error");
+      }
+    });
   }
 
-  this.usersService.createBook(this.newBook).subscribe({
-    next: (res) => {
-      console.log('Book created:', res);
-      this.closePopup();
-      this.bookDetails(); 
-      this.toaster.success("Book added successfully!", "Success");
 
-      this.newBook = {
-        title: '',
-        author_name: '',
-        genre_id: null,
-        total_copies: null,
-        available_copies: null,
-        created_at: ''
-      };
-      
-    },
-    error: (err) => {
-      console.error('Error creating book:', err);
-      this.toaster.error("Failed to add book!", "Error");
-    }
-  });
-}
+
+  loadGenres(): void {
+    const payload = { offset: 0, limit: 100 };
+    this.usersService.genreList(payload).subscribe({
+      next: (res) => {
+        console.log('Genres loaded:', res);
+        this.genres = res;
+      },
+      error: (err) => {
+        console.error('Error fetching genres:', err);
+      }
+    });
+  }
 
   deleteBook(id: number): void {
     if (confirm("Are you sure you want to delete this genre?")) {
       this.usersService.deleteBook({ id }).subscribe({
         next: (res) => {
           console.log('Deleted:', res);
-        this.bookDetails();
-              this.toaster.success("Book deleted successfully!", "Success");
-  
+          this.bookDetails();
+          this.toaster.success("Book deleted successfully!", "Success");
+
         },
         error: (err) => {
           console.error('Error deleting genre:', err);
@@ -102,6 +113,7 @@ submitBook() {
   ngOnInit(): void {
     document.body.style.backgroundColor = "#f9f8fd"
     this.bookDetails();
+    this.loadGenres();
   }
 
   onPageChange(event: PageEvent) {
@@ -143,26 +155,21 @@ submitBook() {
     id: null,
     title: '',
     author_name: '',
-    genre_id: null,
+    genre_name: null,
     total_copies: null,
     available_copies: null,
     created_at: ''
   };
 
-  editBook(book: { id: null; title: string; author_name: string; genre_id: null; total_copies: null; available_copies: null; created_at: string; }) {
+  editBook(book: { id: null; title: string; author_name: string; genre_name: null; total_copies: null; available_copies: null; created_at: string; }) {
     this.editedBook = { ...book };  // assuming book contains all needed fields
     this.showEditPopup = true;
   }
 
   openPopup() {
-    this.newGenre = '';
     this.showPopup = true;
   }
 
-
-  closePopup() {
-    this.showPopup = false;
-  }
 
   showEditPopup = false;
   editedGenreName = '';
@@ -215,40 +222,40 @@ submitBook() {
   }
 
   submitBookUpdate() {
-  if (
-    !this.editedBook.id ||
-    !this.editedBook.title.trim() ||
-    !this.editedBook.author_name.trim() ||
-    !this.editedBook.genre_id ||
-    !this.editedBook.total_copies ||
-    !this.editedBook.available_copies ||
-    !this.editedBook.created_at.trim()
-  ) {
-    this.toaster.error("Please fill all fields!", "Validation Error");
-    return;
-  }
-
-  this.usersService.updateBook(this.editedBook).subscribe({
-    next: (res) => {
-      console.log('Book updated:', res);
-      this.showEditPopup = false;
-      this.editedBook = {
-        id: null,
-        title: '',
-        author_name: '',
-        genre_id: null,
-        total_copies: null,
-        available_copies: null,
-        created_at: ''
-      };
-      this.bookDetails(); 
-      this.toaster.success("Book Updated successfully!", "Success");
-    },
-    error: (err) => {
-      console.error('Error updating book:', err);
-      this.toaster.error("Failed to update book!", "Error");
+    if (
+      !this.editedBook.id ||
+      !this.editedBook.title.trim() ||
+      !this.editedBook.author_name.trim() ||
+      !this.editedBook.genre_name ||
+      !this.editedBook.total_copies ||
+      !this.editedBook.available_copies ||
+      !this.editedBook.created_at.trim()
+    ) {
+      this.toaster.error("Please fill all fields!", "Validation Error");
+      return;
     }
-  });
-}
+
+    this.usersService.updateBook(this.editedBook).subscribe({
+      next: (res) => {
+        console.log('Book updated:', res);
+        this.showEditPopup = false;
+        this.editedBook = {
+          id: null,
+          title: '',
+          author_name: '',
+          genre_name: null,
+          total_copies: null,
+          available_copies: null,
+          created_at: ''
+        };
+        this.bookDetails();
+        this.toaster.success("Book Updated successfully!", "Success");
+      },
+      error: (err) => {
+        console.error('Error updating book:', err);
+        this.toaster.error("Failed to update book!", "Error");
+      }
+    });
+  }
 
 }
