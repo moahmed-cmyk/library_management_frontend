@@ -90,6 +90,9 @@ export class UsersService {
   userDetails(req: any): Observable<any> {
     return this.http.post('/users', req)
   }
+  createBooks(req: any): Observable<any> {
+    return this.http.post('/books/add', req)
+  }
   addGenre(data: any): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = {
@@ -126,15 +129,7 @@ export class UsersService {
     };
     return this.http.post('/users/update', data, headers);
   }
-  createBook(data: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    };
-    return this.http.post('/books/add', data, headers);
-  }
+  
   reservation(data: any): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = {
