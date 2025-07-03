@@ -63,41 +63,54 @@ export class StudentsComponent {
   showEditPopup = false;
   editedGenreName = '';
 
-  editReservation = {
-    id: null as number | null,
-    user_name: null as number | null,
-    book_title: null as number | null,
-    status: '',
-    reserved_at: ''
+editReservation = {
+  id: '',
+  user_id: '',
+  book_id: '',
+  status: '',
+  reserved_at: ''
+};
+
+  // openEditReservation(reservation: any) {
+  //   this.editReservation = {
+  //     id: reservation.id,
+  //     user_id: Number(reservation.user_name),
+  //     book_title: Number(reservation.book_title),
+  //     status: reservation.status,
+  //     reserved_at: reservation.reserved_at.split('T')[0] // remove time part if needed
+  //   };
+  //   this.showEditPopup = true;
+  // }
+
+  openEditPopup(reservation: any) {
+  this.editReservation = {
+    id: reservation.id,
+    user_id: reservation.user_id,
+    book_id: reservation.book_id,
+    status: reservation.status,
+    reserved_at: reservation.reserved_at
   };
 
-  openEditReservation(reservation: any) {
-    this.editReservation = {
-      id: reservation.id,
-      user_name: Number(reservation.user_name),
-      book_title: Number(reservation.book_title),
-      status: reservation.status,
-      reserved_at: reservation.reserved_at.split('T')[0] // remove time part if needed
-    };
-    this.showEditPopup = true;
-  }
+  this.showEditPopup = true;
+}
 
   submitReservationUpdate() {
-  const { user_name, book_title, status, reserved_at, id } = this.editReservation;
+const { user_id, book_id, status, reserved_at, id } = this.editReservation;
 
-  if (!user_name || !book_title || !status.trim() || !reserved_at) {
-    this.toaster.error("Please fill in all fields!", "Validation Error");
-    return;
-  }
-
+if (!user_id || !book_id || !status.trim() || !reserved_at) {
+  this.toaster.error("Please fill in all fields!", "Validation Error");
+  return;
+}
   this.usersService.updateReservation(this.editReservation).subscribe({
     next: (res) => {
       console.log(res);
+    console.log("Sending update payload:", this.editReservation);
+
       
-      if (res.affectedRows > 0) {
+      if (res.status=== 'success') {
         this.toaster.success("Reservation updated!", "Success");
         this.showEditPopup = false;
-        this.reservationRecords(); // reload table
+        this.reservationRecords(); 
       } else {
         this.toaster.error("Update failed!", "Error");
       }
