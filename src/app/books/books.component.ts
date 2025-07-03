@@ -28,7 +28,7 @@ export class BooksComponent {
   newBook = {
     title: '',
     author_name: '',
-    genre_name: '',
+    genre_id: '',
     total_copies: null,
     available_copies: null,
     created_at: ''
@@ -46,13 +46,13 @@ export class BooksComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   router: Router = inject(Router);
-  submitBook() {
+  submitBooks() {
     const b = this.newBook;
 
     if (
       !b.title?.trim() ||
       !b.author_name?.trim() ||
-      !b.genre_name?.trim() ||
+      !b.genre_id?.trim() ||
       !b.total_copies ||
       !b.available_copies ||
       !b.created_at
@@ -61,7 +61,7 @@ export class BooksComponent {
       return;
     }
 
-    this.usersService.createBook(this.newBook).subscribe({
+    this.usersService.createBooks(this.newBook).subscribe({
       next: (res) => {
         console.log('Book created:', res);
 
@@ -122,6 +122,8 @@ export class BooksComponent {
     this.bookDetails(this.searchText);
   }
 
+  
+
 
 
   onSearchChange(): void {
@@ -155,13 +157,13 @@ export class BooksComponent {
     id: null,
     title: '',
     author_name: '',
-    genre_name: null,
+    genre_id: '',
     total_copies: null,
     available_copies: null,
     created_at: ''
   };
 
-  editBook(book: { id: null; title: string; author_name: string; genre_name: null; total_copies: null; available_copies: null; created_at: string; }) {
+  editBook(book: { id: null; title: string; author_name: string; genre_id: ''; total_copies: null; available_copies: null; created_at: string; }) {
     this.editedBook = { ...book };  // assuming book contains all needed fields
     this.showEditPopup = true;
   }
@@ -222,11 +224,13 @@ export class BooksComponent {
   }
 
   submitBookUpdate() {
+      console.log('Edited Book:', this.editedBook);
+
     if (
       !this.editedBook.id ||
       !this.editedBook.title.trim() ||
       !this.editedBook.author_name.trim() ||
-      !this.editedBook.genre_name ||
+      !this.editedBook.genre_id ||
       !this.editedBook.total_copies ||
       !this.editedBook.available_copies ||
       !this.editedBook.created_at.trim()
@@ -242,8 +246,8 @@ export class BooksComponent {
         this.editedBook = {
           id: null,
           title: '',
-          author_name: '',
-          genre_name: null,
+          author_name: 'null',
+          genre_id: 'null',
           total_copies: null,
           available_copies: null,
           created_at: ''
@@ -257,5 +261,19 @@ export class BooksComponent {
       }
     });
   }
+
+  openEditPopup(book: any) {
+  this.editedBook = {
+    id: book.id,  
+    title: book.title,
+    author_name: book.author_name,
+    genre_id: book.genre_id,  // or genre.id if nested
+    total_copies: book.total_copies,
+    available_copies: book.available_copies,
+    created_at: book.created_at
+  };
+
+  this.showEditPopup = true;
+}
 
 }

@@ -1,5 +1,6 @@
 <body>
 
+
     <div class="div-12">
 
         <div class="div-11">
@@ -43,7 +44,7 @@
                         <td>{{item.createAt}}</td>
                         <td class="div-005">
                             <img src="assets\pen-solid.svg" alt="no image" class="img-edit"
-                                (click)="editGenre(item.id, item.name)">
+                                 (click)="openEditPopup(item)">
                             <img src="assets/trash-solid.svg" alt="no image" class="img-trash"
                                 (click)="deleteBook(item.id)">
 
@@ -68,9 +69,9 @@
                     <input type="text" [(ngModel)]="newBook.title" placeholder="Title" class="input-genre" />
                     <input type="text" [(ngModel)]="newBook.author_name" placeholder="Author Name"
                         class="input-genre" />
-                    <select [(ngModel)]="newBook.genre_name" class="input-genre">
+                    <select [(ngModel)]="newBook.genre_id" class="input-genre">
                         <option value="" disabled selected>Select Genre</option>
-                        <option *ngFor="let genre of genres" [value]="genre.name">{{ genre.name }}</option>
+                        <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
                     </select>
 
 
@@ -81,7 +82,7 @@
                     <input type="date" [(ngModel)]="newBook.created_at" placeholder="Created At" class="input-genre" />
 
                     <div class="popup-buttons">
-                        <button class="btn-submit" (click)="submitBook()">Submit</button>
+                        <button class="btn-submit" (click)="submitBooks()">Submit</button>
                         <button class="btn-cancel" (click)="closePopup()">Cancel</button>
                     </div>
                 </div>
@@ -94,6 +95,13 @@
                     <input type="text" [(ngModel)]="editedBook.title" placeholder="Title" class="input-genre" />
                     <input type="text" [(ngModel)]="editedBook.author_name" placeholder="Author Name"
                         class="input-genre" />
+
+                    <select [(ngModel)]="editedBook.genre_id" class="input-genre">
+                        <option value="" disabled >Select Genre</option>
+                        <option *ngFor="let genre of genres" [value]="genre.id">
+                            {{ genre.name }}
+                        </option>
+                    </select>
                     <input type="number" [(ngModel)]="editedBook.total_copies" placeholder="Total Copies"
                         class="input-genre" />
                     <input type="number" [(ngModel)]="editedBook.available_copies" placeholder="Available Copies"
