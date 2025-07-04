@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { StocksPageComponent } from "./stocks-page/stocks-page.component";
 import { CommonModule } from '@angular/common';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent  {
   title = 'my-angular-app';
 
   isSidebarClosed = false;
+
+   authService: AuthService = inject(AuthService)
 
   toggleSidebar() {
     this.isSidebarClosed = !this.isSidebarClosed;
@@ -33,6 +36,20 @@ export class AppComponent {
 
   isAuthPage(): boolean {
     return this.router.url === '/' || this.router.url === '/login' || this.router.url === '/register';
+  }
+
+  ngOnInit(){
+    const user=JSON.parse(localStorage.getItem('userLoginDetail') || '{}')
+    if(user.user.account===true){
+      this.authService.setUser(user)
+      if(this.router.url==='/'||this.router.url==='/login'){
+        this.router.navigate(['/genre'])
+      }
+
+    }else{
+      this.router.navigate(['/login'])
+    }
+
   }
 
 }
