@@ -7,6 +7,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { json } from "express";
 
 @Component({
   selector: 'app-login-page',
@@ -33,7 +34,7 @@ export class LoginPageComponent {
 
   usersService: UsersService = inject(UsersService);
   authService: AuthService = inject(AuthService)
-    toaster=inject(ToastrService)
+  toaster = inject(ToastrService)
 
   email = '';
   password = '';
@@ -44,13 +45,14 @@ export class LoginPageComponent {
         console.log(res);
 
         if (res.token) {
-          localStorage.setItem('token', res.token);  
+          localStorage.setItem('token', res.token);
         }
 
         if (res.account === true) {
-          this.authService.setUser(res); 
+          this.authService.setUser(res);
+          localStorage.setItem('userLoginDetail',JSON.stringify (res));
           this.router.navigate(['/genre']);
-             this.toaster.success("Login successfully!", "Success");
+          this.toaster.success("Login successfully!", "Success");
         } else {
           alert('Login failed. Invalid account.');
         }
@@ -82,7 +84,12 @@ export class LoginPageComponent {
       email: [null, Validators.required],
       password: [null, [Validators.required]],
       role: [null, [Validators.required]],
-    })
+    });
+
+    const user=JSON.parse(localStorage.getItem('userLoginDetail')||'{}');
+    if(user && user.account===true){
+      this.router.navigate(['/genre'])
+    }
   }
 
 }
